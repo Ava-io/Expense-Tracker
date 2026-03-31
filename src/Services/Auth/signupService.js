@@ -1,4 +1,3 @@
-import { use } from "react";
 import { pool } from "../../Config/db.js";
 import { generatePassword } from "../../Utils/generatePassword.js";
 import { errorResponse, successResponse } from "../../Utils/responseHandler.js";
@@ -18,7 +17,7 @@ const SignupService = async (req, res) => {
 
     // to avoid duplicate email from signing up
     const emailExists = await pool.query(
-      "SELECT * FROM users WHERE email = $1"[email],
+      "SELECT * FROM users WHERE email = $1",[email],
     );
 
     if (emailExists.rows.length != 0) {
@@ -62,3 +61,5 @@ const SignupService = async (req, res) => {
     errorResponse(res, 500, "Signup Failed");
   }
 };
+
+export default SignupService;

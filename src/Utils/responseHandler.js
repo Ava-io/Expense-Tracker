@@ -6,7 +6,7 @@ export const successResponse = (res, statusCode, message, data) => {
   });
 };
 
-export const errorResponse = (res, statusCode, message) => {
+export const errorResponse = (res, statusCode, message, data) => {
   return res.status(statusCode).json({
     status: false,
     message: message,
