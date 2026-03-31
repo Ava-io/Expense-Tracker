@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
 import pg from "pg";
-import { createBudgetTable } from "../Model/createBudgetTable";
-import { createTransactionTable } from "../Model/createTransactionTable";
-import { createGoalTable } from "../Model/createGoalTable";
+import { createBudgetTable } from "../Model/createBudgetTable.js";
+import { createTransactionTable } from "../Model/createTransactionTable.js";
+import { createGoalTable } from "../Model/createGoalTable.js";
+import { createUsersTable } from "../Model/createUsersTable.js";
 
 dotenv.config();
 
@@ -30,7 +31,10 @@ export const initDb = async () => {
     await client.query(createTransactionTable);
     console.log("transaction created successfully");
 
-    
+    await client.query(createUsersTable);
+    console.log("users created successfully");
+
+
   } catch (error) {
     console.log(error, "Database not connected");
   }
