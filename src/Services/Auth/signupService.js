@@ -17,7 +17,8 @@ const SignupService = async (req, res) => {
 
     // to avoid duplicate email from signing up
     const emailExists = await pool.query(
-      "SELECT * FROM users WHERE email = $1",[email],
+      "SELECT * FROM users WHERE email = $1",
+      [email],
     );
 
     if (emailExists.rows.length != 0) {
@@ -29,7 +30,7 @@ const SignupService = async (req, res) => {
 
     const password = generatePassword("users");
     const role = "users";
-
+    console.log("this is userpassword", password);
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -54,7 +55,7 @@ const SignupService = async (req, res) => {
     console.log(user);
 
     await client.query("COMMIT");
-    successResponse(res, 201, "Signup successful", userResult.rows[0]);
+    successResponse(res, 201, "Signup successful", userResult.rows);
   } catch (error) {
     await client.query("ROLLBACK");
     console.log(error);
