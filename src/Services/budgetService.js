@@ -52,9 +52,46 @@ export const getBudgets = async (req, res) => {
     const getBudgets = await pool.query(`SELECT * FROM budget`);
     console.log(getBudgets.rows);
 
-    return successResponse(res, 200, "All budgets gotten successfully", getBudgets.rows);
+    return successResponse(
+      res,
+      200,
+      "All budgets gotten successfully",
+      getBudgets.rows,
+    );
   } catch (error) {
     console.log(error);
     return errorResponse(res, 400, "Get Budgets Failed");
+  }
+};
+
+// get budget by id
+export const getBudgetById = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const getBudget = await pool.query(
+      `
+            SELECT * FROM budget WHERE id = $1 
+            `,[id],
+    );
+    console.log(getBudget);
+
+    const idExists = await pool.query("SELECT * FROM budget WHERE id = $1", [
+      id,
+    ]);
+    console.log(idExists);
+
+    if (idExists.rows.length === 0) {
+      return errorResponse(res, 400, "Budget not found");
+    }
+
+    return successResponse(
+      res,
+      200,
+      "Budget fetched successfully",
+      getBudget.rows,
+    );
+  } catch (error) {
+    console.log(error);
+    return errorResponse(res, 400, "Get Budget Failed");
   }
 };
