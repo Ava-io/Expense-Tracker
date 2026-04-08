@@ -4,6 +4,7 @@ import { createBudgetTable } from "../Model/createBudgetTable.js";
 import { createTransactionTable } from "../Model/createTransactionTable.js";
 import { createGoalTable } from "../Model/createGoalTable.js";
 import { createUsersTable } from "../Model/createUsersTable.js";
+import { createCategoryTable } from "../Model/createCategoryTable.js";
 
 dotenv.config();
 
@@ -34,7 +35,10 @@ export const initDb = async () => {
     await client.query(createUsersTable);
     console.log("users created successfully");
 
+    await client.query(createCategoryTable);
+    console.log("categories created successfully");
 
+    
   } catch (error) {
     console.log(error, "Database not connected");
   }

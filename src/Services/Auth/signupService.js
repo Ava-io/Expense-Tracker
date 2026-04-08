@@ -55,7 +55,7 @@ const SignupService = async (req, res) => {
     console.log(user);
 
     await client.query("COMMIT");
-    successResponse(res, 201, "Signup successful", userResult.rows);
+    return successResponse(res, 201, "Signup successful", userResult.rows);
   } catch (error) {
     await client.query("ROLLBACK");
     console.log(error);
