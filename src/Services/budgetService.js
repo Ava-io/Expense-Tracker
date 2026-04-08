@@ -71,7 +71,8 @@ export const getBudgetById = async (req, res) => {
     const getBudget = await pool.query(
       `
             SELECT * FROM budget WHERE id = $1 
-            `,[id],
+            `,
+      [id],
     );
     console.log(getBudget);
 
@@ -94,4 +95,77 @@ export const getBudgetById = async (req, res) => {
     console.log(error);
     return errorResponse(res, 400, "Get Budget Failed");
   }
+};
+
+// edit budget by id
+export const editBudgetById = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    console.log("req body", req.body);
+
+    const { category, monthly_limit } = req.body;
+
+    console.log(id);
+
+    const editBudget = await pool.query(
+      `     
+            UPDATE budget 
+            SET category = COALESCE($1, category), 
+            monthly_limit = COALESCE($2, monthly_limit) 
+            WHERE id = $3 
+            RETURNING *
+            `,
+      [category, monthly_limit, id],
+    );
+
+    // console.log(editBudget);
+
+    const idExists = await pool.query("SELECT * FROM budget WHERE id = $1", [
+      id,
+    ]);
+    console.log(idExists);
+
+    if (idExists.rows.length === 0) {
+      return errorResponse(res, 400, "Budget not found");
+    }
+
+    return successResponse(
+      res,
+      200,
+      "Budget edited successfully",
+      editBudget.rows,
+    );
+  } catch (error) {
+    console.log(error);
+    return errorResponse(res, 400, "Edit Budget failed");
+  }
+};
+
+// delete budget by id
+export const delBudgetById = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+
+    const { category, monthly_limit } = req.body;
+
+    if (!category || !monthly_limit) {
+      return errorResponse(res, 400, "All fields are required");
+    }
+
+    const deletebudget = await pool.query(`DELETE FROM budget WHERE id = $1`, [
+      id,
+    ]);
+    console.log(deletebudget);
+
+    const idExists = await pool.query("SELECT * FROM budget WHERE id = $1", [
+      id,
+    ]);
+    console.log(idExists);
+
+    if (idExists.rows.length === 0) {
+      return errorResponse(res, 404, "Budget not found");
+    }
+
+    return successResponse(res, 200, "Budget deleted successfully");
+  } catch (error) {}
 };
