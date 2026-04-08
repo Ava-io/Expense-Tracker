@@ -46,7 +46,15 @@ export const createBudgetService = async (req, res) => {
   }
 };
 
+// get all budget
+export const getBudgets = async (req, res) => {
+  try {
+    const getBudgets = await pool.query(`SELECT * FROM budget`);
+    console.log(getBudgets.rows);
 
-
-// // create  budget
-// export const 
+    return successResponse(res, 200, "All budgets gotten successfully", getBudgets.rows);
+  } catch (error) {
+    console.log(error);
+    return errorResponse(res, 400, "Get Budgets Failed");
+  }
+};
