@@ -4,15 +4,15 @@ import { errorResponse, successResponse } from "../Utils/responseHandler.js";
 export const createBudgetService = async (req, res) => {
   try {
     // verify needed details
-    const { category, monthly_limit } = req.body;
+    const { category_id, monthly_limit } = req.body;
 
-    if (!category || !monthly_limit) {
+    if (!category_id || !monthly_limit) {
       return errorResponse(res, 400, "All fields are required");
     }
 
     const budgetExists = await pool.query(
-      "SELECT * FROM budget WHERE category = $1",
-      [category],
+      "SELECT * FROM budget WHERE category_id = $1",
+      [category_id],
     );
 
     console.log("check if budget exists", budgetExists);
@@ -21,17 +21,26 @@ export const createBudgetService = async (req, res) => {
     }
 
     const createBudgetQuery = `
-    INSERT INTO budget(category, monthly_limit)
+    INSERT INTO budget(category_id, monthly_limit)
     VALUES ($1, $2)
     RETURNING * 
     `;
 
     const budgetResult = await pool.query(createBudgetQuery, [
-      category,
+      category_id,
       monthly_limit,
     ]);
     console.log(budgetResult);
 
+    const getBudget = await pool.query(
+      `SELECT budget.category_id 
+      FROM budget 
+      INNER JOIN categories 
+      ON budget.category_id = categories_id 
+      ORDER BY budget.category_id ASC`,
+    );
+
+    console.log(getBudget.rows);
     const budgets = budgetResult.rows[0];
     console.log(budgets);
 
@@ -42,6 +51,7 @@ export const createBudgetService = async (req, res) => {
       budgetResult.rows,
     );
   } catch (error) {
+    console.log(error);
     return errorResponse(res, 500, "Failed to create budget");
   }
 };
@@ -103,19 +113,19 @@ export const editBudgetById = async (req, res) => {
     const id = parseInt(req.params.id);
     console.log("req body", req.body);
 
-    const { category, monthly_limit } = req.body;
+    const { category_id, monthly_limit } = req.body;
 
     console.log(id);
 
     const editBudget = await pool.query(
       `     
             UPDATE budget 
-            SET category = COALESCE($1, category), 
+            SET category_id = COALESCE($1, category_id), 
             monthly_limit = COALESCE($2, monthly_limit) 
             WHERE id = $3 
             RETURNING *
             `,
-      [category, monthly_limit, id],
+      [category_id, monthly_limit, id],
     );
 
     // console.log(editBudget);
@@ -146,9 +156,9 @@ export const delBudgetById = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
 
-    const { category, monthly_limit } = req.body;
+    const { category_id, monthly_limit } = req.body;
 
-    if (!category || !monthly_limit) {
+    if (!category_id || !monthly_limit) {
       return errorResponse(res, 400, "All fields are required");
     }
 

@@ -10,15 +10,15 @@ export const createGoalService = async (req, res) => {
       return errorResponse(res, 400, "All fields are required");
     }
 
-    const goalExists = await pool.query(
-      "SELECT * FROM goals WHERE goal_name = $1",
-      [goal_name],
-    );
-    console.log(goalExists);
+    // const goalExists = await pool.query(
+    //   "SELECT * FROM goals WHERE goal_name = $1",
+    //   [goal_name],
+    // );
+    // console.log(goalExists);
 
-    if (goalExists.rows.length > 0) {
-      return errorResponse(res, 400, "Goal already exists");
-    }
+    // if (goalExists.rows.length > 0) {
+    //   return errorResponse(res, 400, "Goal already exists");
+    // }
 
     const createGoalQuery = `
     INSERT INTO goals(goal_name, target_amount, saved_sofar, deadline)
@@ -44,6 +44,7 @@ export const createGoalService = async (req, res) => {
       goalResult.rows,
     );
   } catch (error) {
+    console.log(error);
     return errorResponse(res, 500, "Failed to create goal");
   }
 };

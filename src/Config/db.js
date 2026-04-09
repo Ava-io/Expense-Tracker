@@ -5,6 +5,10 @@ import { createTransactionTable } from "../Model/createTransactionTable.js";
 import { createGoalTable } from "../Model/createGoalTable.js";
 import { createUsersTable } from "../Model/createUsersTable.js";
 import { createCategoryTable } from "../Model/createCategoryTable.js";
+import {
+  addCategoryColumn,
+  removeCategoryColumn,
+} from "../Model/createAltertable.js";
 
 dotenv.config();
 
@@ -38,7 +42,11 @@ export const initDb = async () => {
     await client.query(createCategoryTable);
     console.log("categories created successfully");
 
-    
+    await client.query(removeCategoryColumn);
+    console.log("category removed successfully");
+
+    await client.query(addCategoryColumn);
+    console.log("category added successfully");
   } catch (error) {
     console.log(error, "Database not connected");
   }
