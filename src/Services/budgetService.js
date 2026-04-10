@@ -33,10 +33,10 @@ export const createBudgetService = async (req, res) => {
     console.log(budgetResult);
 
     const getBudget = await pool.query(
-      `SELECT budget.category_id 
-      FROM budget 
+      `SELECT budget.category_id, budget.monthly_limit
+       FROM budget 
       INNER JOIN categories 
-      ON budget.category_id = categories_id 
+      ON budget.category_id = categories.id 
       ORDER BY budget.category_id ASC`,
     );
 
