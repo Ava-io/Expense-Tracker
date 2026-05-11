@@ -11,8 +11,32 @@ import {
 } from "react-icons/io";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { ImSearch } from "react-icons/im";
+import hamburg from "../assets/sous-vide-hamburger-header-og.jpg";
 
+interface mockData {
+  id: string;
+  thumbnail: string;
+  category: string;
+  date: string;
+  amount: string;
+}
 const Transaction = () => {
+  const mockData = [
+    {
+      id: 1,
+      thumbnail: "hamburg",
+      category: "Food",
+      date: "May 11, 2026",
+      amount: "#3,000",
+    },
+    {
+      id: 2,
+      thumbnail: "hamburg",
+      category: "Transport",
+      date: "May 10, 2026",
+      amount: "#2000",
+    },
+  ];
   return (
     <div className="p-3 h-screen ">
       <div>

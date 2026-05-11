@@ -46,7 +46,7 @@ export default function PieChartCom() {
           outerRadius={55}
           innerRadius={35}
           isAnimationActive={true}
-          strokeWidth={2}
+          // strokeWidth={2}
         >
           {data.map((entry, index) => (
             <Cell key={index} fill={entry.fill} />
