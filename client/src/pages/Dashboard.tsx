@@ -1,162 +1,6 @@
-// import { NONAME } from "dns";
-// import NavbarComponent from "../components/Navbar/NavbarComponent";
 
-// import PieChartCom from "../components/pieChart";
-// import Button from "../shared/Button";
-// import { MdArrowRightAlt } from "react-icons/md";
-// import Transaction from "./Transaction";
-// import { useNavigate } from "react-router-dom";
-// import { RechartsDevtools } from "@recharts/devtools";
-// import {
-//   Pie,
-//   PieChart,
-//   Sector,
-//   // PieSectorDataItem,
-//   // Tooltip,
-//   // TooltipIndex,
-// } from "recharts";
-import Modal from "../shared/Modal";
+
 import NavbarComponent from "../components/Navbar/NavbarComponent";
-import { useState } from "react";
-
-// const Dashboard = ({ isAnimationActive = true, defaultIndex = undefined }) => {
-
-//   return (
-//     <div className="px-[30px]  flex flex-col  gap-3">
-//       <NavbarComponent
-//         pathTitle="Dashboard"
-//         showDash={true}
-//         showPage={false}
-//         showExport={false}
-//         label="Add Transaction"
-//         label2=""
-//       />
-
-//       <div className="flex  gap-3 px-[10px]">
-//         {Flex.map((item) => (
-//           <div className="border w-full p-3 bg-[#131218] rounded-lg flex flex-col border-white/5">
-//             <div className="flex flex-col  p-2 gap-2 text-white">
-//               <div className="flex items-center gap-1">
-//                 <div className={`size-2 rounded-full ${item.bgColor} `} />
-//                 <h1 className="text-[10px] text-[#8779D2] font-syne">
-//                   {item.title}
-//                 </h1>
-//               </div>
-//               <span
-//                 className={`"text-[#8779D2] font-bold text-[24px] font-syne ${item.color}`}
-//               >
-//                 {item.amount}
-//               </span>
-//               <div className="text-[10.5px] font-sans">
-//                 <span className="border border-white/5 rounded-lg p-1 bg-[#272636] text-[#8779D2]">
-//                   {item.data}
-//                 </span>
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-
-//       <div className="mt-2 flex  flex-col md:flex-row gap-3 ">
-//
-
-//           <div className=" w-full relative ">
-//             <BarChart
-//               style={{
-//                 width: "100%",
-//                 maxWidth: "1000px",
-//                 maxHeight: "30vh",
-//                 aspectRatio: 1.618,
-//               }}
-//               responsive
-//               data={data}
-//             >
-//               <CartesianGrid
-//                 stroke="#e5e7eb"
-//                 strokeWidth={0.2}
-//                 strokeOpacity={0.3}
-//                 vertical={true}
-//               />
-//               <XAxis dataKey="name" />
-//               <YAxis width="auto" />
-//               <Tooltip
-//                 contentStyle={{
-//                   backgroundColor: "#131218",
-//                   border: "none",
-//                   borderRadius: "8px",
-//                   padding: "6px 10px 0px",
-//                 }}
-//                 cursor={false}
-//               />
-//               <Legend
-//                 verticalAlign="top"
-//                 align="right"
-//                 wrapperStyle={{ paddingBottom: "20px", fontSize: "11px" }}
-//               />
-//               <Bar
-//                 dataKey="income"
-//                 fill="#2C9675"
-//                 isAnimationActive={isAnimationActive}
-//                 radius={[10, 10, 0, 0]}
-//                 animationDuration={800}
-//                 animationEasing={"ease-out"}
-//               />
-//               <Bar
-//                 dataKey="expense"
-//                 fill="#5A4EAF"
-//                 radius={[10, 10, 0, 0]}
-//                 isAnimationActive={isAnimationActive}
-//                 animationDuration={800}
-//                 animationEasing={"ease-out"}
-//               />
-//             </BarChart>
-//           </div>
-//         </div>
-//         <div className="w-1/4 border border-white/5 bg-[#131218] rounded-lg p-2 text-white flex flex-col gap-1">
-
-//           <div>
-//             <PieChartCom />
-//           </div>
-
-//           <div className="item-center justify-center align-center flex">
-//             <span className="text-[#8779D2] text-[12px]">No expenses yet</span>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* THIRD row */}
-//       <div className="w-full border border-white/5 bg-[#13131B] p-2 rounded-lg">
-//   <div className="justify-between flex">
-//     <div className="flex flex-col ">
-//       <h1 className="text-white text-[17px]">Recent Transactions</h1>
-//       <span className="text-[#8779D2] text-[10px]">
-//         0 total transactions
-//       </span>
-//     </div>
-
-//     <div className="gap-1">
-//       <Button
-//         className="border-white/5 items-center rounded-lg border text-[#8779D2]"
-//         onClick={() => navigate("/transactions")}
-//       >
-//         <h1 className="text-[#8779D2]">View all</h1>
-//         <MdArrowRightAlt className="text-[15px] text-[#8779D2]" />
-//       </Button>
-//     </div>
-//   </div>
-//   <div className="items-center justify-center align-center flex pt-[200px] flex-col">
-//     <h1 className="text-[#8779D2]">No transactions yet </h1>
-//     <span className="text-[#8779D2]">
-//       Add your first one to get started
-//     </span>
-//   </div>
-// </div>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
 import {
   BarChart,
   Legend,
@@ -165,13 +9,14 @@ import {
   CartesianGrid,
   Tooltip,
   Bar,
-  
 } from "recharts";
 import PieChartCom from "../components/pieChart";
 import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
-import { MdArrowRightAlt, MdOutlineCancel } from "react-icons/md";
-import { TbCurrencyNaira } from "react-icons/tb";
+import { MdArrowDownward, MdArrowRightAlt, MdArrowUpward, MdOutlineCancel } from "react-icons/md";
+import { useState } from "react";
+import Modal from "../shared/Modal";
+
 // import { useEffect, useState } from "react";
 
 interface DashboardProps {
@@ -181,9 +26,76 @@ interface DashboardProps {
   color: string;
   bgGradientColor: string;
 }
-const Dashboard = ({ isAnimationActive = true}) => {
-    const [goalModal, setGoalModal] = useState(false);
-  
+
+
+interface modalCategory {
+  thumbnail: string;
+  category: string;
+}
+
+const Dashboard = ({ isAnimationActive = true }) => {
+  const [transactionModal, setTransactionModal] = useState(false);
+
+
+  const Flex1: modalCategory[] = [
+    {
+      thumbnail: "🍔",
+      category: "Food",
+    },
+    {
+      thumbnail: "🚗",
+      category: "Transport",
+    },
+    {
+      thumbnail: "🏠",
+      category: "Housing",
+    },
+    {
+      thumbnail: "💊",
+      category: "Health",
+    },
+    {
+      thumbnail: "🎮",
+      category: "Fun",
+    },
+    {
+      thumbnail: "🛍️",
+      category: "Shopping",
+    },
+    {
+      thumbnail: "📚",
+      category: "Education",
+    },
+    {
+      thumbnail: "💡",
+      category: "Utilities",
+    },
+    {
+      thumbnail: "💵",
+      category: "Salary",
+    },
+    {
+      thumbnail: "💻",
+      category: "Freelance",
+    },
+    {
+      thumbnail: "📈",
+      category: "Business",
+    },
+    {
+      thumbnail: "🎁",
+      category: "Gift",
+    },
+    {
+      thumbnail: "💰",
+      category: "Savings",
+    },
+    {
+      thumbnail: "⌾",
+      category: "Others",
+    },
+  ];
+
   const Flex: DashboardProps[] = [
     {
       title: "NET BALANCE",
@@ -231,8 +143,6 @@ const Dashboard = ({ isAnimationActive = true}) => {
 
   const navigate = useNavigate();
 
-  
-
   return (
     <div className=" gap-4 ">
       {/* Nav bar component */}
@@ -243,61 +153,69 @@ const Dashboard = ({ isAnimationActive = true}) => {
         showExport={false}
         label="Add Transaction"
         label2=""
+        buttonClick={()=>setTransactionModal(true)}
       />
 
-      <Modal isOpen={goalModal}>
+      <Modal isOpen={transactionModal}>
         <div className="p-6 bg-[#131319] rounded-lg border border-white/5">
           <div className="justify-between flex">
             <div>
-              <h1 className="text-white">New Savings Goal</h1>
+              <h1 className="text-white">New Transaction</h1>
             </div>
 
             <div>
-              <Button className="border border-white/5 rounded-lg bg-[#1A1B22] p-4 ">
+              <Button
+                className="border border-white/5 rounded-lg p-4 bg-[#1A1B22]"
+                onClick={() => setTransactionModal(true)}
+              >
                 <MdOutlineCancel className="text-[14px] text-white" />
               </Button>
             </div>
           </div>
 
-          <div className="gap-2">
+          <div className="border border-white/5 p-1 grid grid-cols-2 gap-2 rounded-lg bg-[#131319] mt-2 ">
+            <div className="  hover:bg-[#31212B] group flex gap-1 items-center justify-center  rounded-lg col-span-1 p-2  ">
+              <div className="  text-[#8779D2]  group-hover:text-[#7C3B4B]">
+                <MdArrowDownward />
+              </div>{" "}
+              <h1 className="text-[#8779D2] text-[12px] group-hover:text-[#7C3B4B] ">
+                Expense
+              </h1>
+            </div>
+
+            <div className="  hover:bg-[#1F2E2F] group flex gap-1 items-center justify-center  rounded-lg col-span-1 p-2  ">
+              <div className="  text-[#8779D2]  group-hover:text-[#2A6D5B]">
+                <MdArrowUpward />
+              </div>{" "}
+              <h1 className="text-[#8779D2] text-[12px] group-hover:text-[#2A6D5B] ">
+                Income
+              </h1>
+            </div>
+          </div>
+
+          <div className="gap-2 mt-3">
             <form className="mt-2 w-full grid grid-cols-2 gap-2">
               <div className="col-span-2 w-full">
-                <label className="text-[#8779D2] text-[13px] ">GOAL NAME</label>
+                <label className="text-[#8779D2] text-[10px]">AMOUNT</label>
+
                 <input
-                  type="text"
-                  placeholder="e.g Emergency Fund, New Laptop"
+                  type="number"
+                  placeholder="0.00"
                   className="p-2 border text-[12px] text-[#8779D2] rounded-lg w-full border-white/5 bg-[#212127]"
                 />
               </div>
 
               <div className="col-span-2">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="col-span-1">
-                    <label className="text-[#8779D2] text-[13px]">
-                      TARGET AMOUNT
+                  <div className="col-span-2">
+                    <label className="text-[#8779D2] text-[10px] ">
+                      DESCRIPTION
                     </label>
-                    <div className="relative">
-                      <TbCurrencyNaira className=" text-[#8779D2] absolute top-2 left-2" />
-
-                      <input
-                        type="number"
-                        placeholder="500000"
-                        className="px-8 py-2 border text-[12px] text-[#8779D2] rounded-lg  w-full border-white/5 bg-[#212127]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-span-1">
-                    <label className="text-[#8779D2] text-[13px]">
-                      SAVED SO FAR
-                    </label>
-                    <div>
-                      <input
-                        type="number"
-                        placeholder="500000"
-                        className="p-2 border text-[12px] w-full text-[#8779D2] rounded-lg border-white/5 bg-[#212127]"
-                      />
-                    </div>
+                    <input
+                      type="text"
+                      placeholder="What was this for?"
+                      className="p-2 border text-[12px] text-[#8779D2] rounded-lg w-full border-white/5 bg-[#212127]"
+                    />
                   </div>
                 </div>
               </div>
@@ -305,46 +223,63 @@ const Dashboard = ({ isAnimationActive = true}) => {
               <div className="col-span-2">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-1">
-                    <label className="text-[#8779D2] text-[13px]">
-                      DEADLINE
-                    </label>
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="20/08/2026"
-                        className="p-2 border text-[12px] w-full text-gray-300 rounded-lg  border-white/5 bg-[#212127]"
-                      />
-                    </div>
+                    <label className="text-[#8779D2] text-[10px]">DATE</label>
+                    <input
+                      type="date"
+                      placeholder="22/05/2026"
+                      className="p-2 border text-[12px] text-[#8779D2] rounded-lg w-full border-white/5 bg-[#212127]"
+                    />
                   </div>
 
                   <div className="col-span-1">
-                    <label className="text-[#8779D2] text-[13px]">ICON</label>
+                    <label className="text-[#8779D2] text-[10px]">
+                      NOTE(OPTIONAL)
+                    </label>
+
                     <input
                       type="text"
-                      placeholder="Goal"
-                      className="p-2 border text-[12px] w-full text-gray-300 rounded-lg border-white/5 bg-[#212127]"
+                      placeholder="Extra details..."
+                      className="p-2 border text-[12px] text-[#8779D2] rounded-lg w-full border-white/5 bg-[#212127]"
                     />
                   </div>
                 </div>
               </div>
-            </form>
-          </div>
 
-          <div className="col-span-2 ">
-            <div className="grid grid-cols-2 mt-2 gap-4 ">
-              <div className="col-span-1">
-                <Button
-                  className="border border-white/5 w-full rounded-lg bg-[#212127] p-4 space-y-2"
-                  onClick={() => setGoalModal(false)}
-                >
-                  Cancel
-                </Button>
+              <div className="col-span-2">
+                <label className="text-[#8779D2] text-[10px]">CATEGORY</label>
+                <div className="grid grid-cols-4 gap-2">
+                  {Flex1.map((item) => (
+                    <div className="border hover:border-[#8779D2] hover:bg-[#211F38] group w-full p-3 rounded-md  flex flex-col border-white/5 bg-[#212127] items-center">
+                      <div>
+                        <span>{item.thumbnail}</span>
+                      </div>
+                      <div className="">
+                        <h1 className="text-[#8779D2] text-[10px] group-hover:text-white ">
+                          {item.category}
+                        </h1>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
+            </form>
 
-              <div className="col-span-1">
-                <Button className="border w-full border-white/5 rounded-lg bg-[#8779D2] p-4 space-y-2">
-                  Create Goal
-                </Button>
+            <div className="col-span-2 ">
+              <div className="grid grid-cols-2 mt-1 gap-4 ">
+                <div className="col-span-1">
+                  <Button
+                    className="border border-white/5 w-full  rounded-lg bg-[#212127] p-4 space-y-2"
+                    onClick={() => setTransactionModal(false)}
+                  >
+                    <h1 className="text-[#8779D2]">Cancel</h1>
+                  </Button>
+                </div>
+
+                <div className="col-span-1">
+                  <Button className="border w-full border-white/5 rounded-lg bg-[#8779D2] p-4 space-y-2">
+                    Add Transaction
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
@@ -383,7 +318,7 @@ const Dashboard = ({ isAnimationActive = true}) => {
         <div className="w-full grid grid-cols-1 md:grid-cols-5 gap-4">
           {/* Bar chart */}
 
-          <div className="w-full col-span-1  md:col-span-4 border bg-[#131218]  text-white border-white/5  rounded-lg gap-2 px-2.5 flex-1 flex flex-col ">
+          <div className="w-full col-span-1  md:col-span-4 border bg-[#131218]  text-white border-white/5  rounded-lg gap-2 px-[10px] flex-1 flex flex-col ">
             <div className="">
               <h1 className="text-[14.5px] font-sans"> Income vs Expenses</h1>
               <span className="text-[11px] text-[#8779D2]">
@@ -475,7 +410,7 @@ const Dashboard = ({ isAnimationActive = true}) => {
               </Button>
             </div>
           </div>
-          <div className="items-center justify-center align-center flex min-h-62.5 h-full flex-col">
+          <div className="items-center justify-center align-center flex min-h-[250px] h-full flex-col">
             <h1 className="text-[#8779D2] text-[12px]">No transactions yet </h1>
             <span className="text-[#8779D2] text-[12px]">
               Add your first one to get started

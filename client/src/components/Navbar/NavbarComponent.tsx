@@ -11,6 +11,7 @@ interface NavBarProps {
   label?: string;
   label2?: string;
   onClick?: () => void;
+  buttonClick?:any
 }
 
 const NavbarComponent = ({
@@ -21,6 +22,7 @@ const NavbarComponent = ({
   label,
   label2,
   onClick,
+  buttonClick
 }: NavBarProps) => {
   const [mobile, setMobile] = useState(false);
   useEffect(() => {
@@ -61,7 +63,7 @@ const NavbarComponent = ({
                   </div>
 
                   <div>
-                    <Button className="bg-[#946ACC] hover:bg-[#b37ffb]">
+                    <Button className="bg-[#946ACC] hover:bg-[#b37ffb]" onClick={buttonClick}>
                       <LuPlus className="text-lg" />
                       {label}
                     </Button>
