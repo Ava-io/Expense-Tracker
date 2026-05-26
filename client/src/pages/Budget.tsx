@@ -1,4 +1,3 @@
-import React from "react";
 import NavbarComponent from "../components/Navbar/NavbarComponent";
 import Button from "../shared/Button";
 import { IoMdClose } from "react-icons/io";
@@ -19,7 +18,7 @@ interface budgetData {
   bgThumbail: string;
 }
 const Budget = () => {
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
   const [bugetModal, setBudgetModal] = useState(false);
 
   const Flex: budgetData[] = [
@@ -85,7 +84,7 @@ const Budget = () => {
             <div>
               <button
                 className="border border-white/5 rounded-lg bg-[#1A1B22] p-1 "
-                onClick={() => setModal(false)}
+                // onClick={() => setModal(false)}
               >
                 <MdOutlineCancel className="text-[14px] text-white/5" />
               </button>
@@ -140,7 +139,7 @@ const Budget = () => {
           </div>
         </div>
       </Modal>
-      <div className="w-full grid gap-4 p-[30px]">
+      <div className="w-full grid gap-4 p-7.5">
         {/* GRID DIV */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
           {Flex.map((item) => (
@@ -171,7 +170,7 @@ const Budget = () => {
                   </Button>
                 </div>
               </div>
-              <div className="flex gap-2  mt-[10px] justify-between">
+              <div className="flex gap-2  mt-2.5 justify-between">
                 <div>
                   <h1 className="text-[#30C092] text-[12px]">
                     #{item.amountSpent} spent
@@ -199,7 +198,7 @@ const Budget = () => {
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${item.percentageSpent}%` }}
-                        viewPort={{ once: true }}
+                        // viewPort ={{ once: true }}
                         transition={{ duration: 1, delay: 0.5 }}
                         className="h-full bg-green-500 rounded-full"
                       />

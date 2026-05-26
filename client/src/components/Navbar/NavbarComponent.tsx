@@ -1,7 +1,5 @@
-import { CiCalendarDate, CiCirclePlus } from "react-icons/ci";
 import Button from "../../shared/Button";
 import { LuPlus } from "react-icons/lu";
-import { BiArrowToBottom } from "react-icons/bi";
 import { IoCalendarNumber } from "react-icons/io5";
 import { useState, useEffect } from "react";
 

@@ -1,4 +1,4 @@
-import { useState, type ReactElement, type ReactNode } from "react";
+import {  type ReactNode } from "react";
 
 interface ModalProps {
   children: ReactNode;
@@ -7,6 +7,7 @@ interface ModalProps {
 }
 
 const Modal = ({ children, isOpen }: ModalProps) => {
+  console.log(isOpen)
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0  z-50 flex items-center justify-center bg-black/50 rounded-lg">

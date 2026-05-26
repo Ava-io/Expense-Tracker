@@ -164,13 +164,13 @@ import {
   CartesianGrid,
   Tooltip,
   Bar,
-  ResponsiveContainer,
+  
 } from "recharts";
 import PieChartCom from "../components/pieChart";
 import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
 import { MdArrowRightAlt } from "react-icons/md";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 interface DashboardProps {
   title: string;
@@ -179,7 +179,7 @@ interface DashboardProps {
   color: string;
   bgGradientColor: string;
 }
-const Dashboard = ({ isAnimationActive = true, defaultIndex = undefined }) => {
+const Dashboard = ({ isAnimationActive = true}) => {
   const Flex: DashboardProps[] = [
     {
       title: "NET BALANCE",
@@ -241,7 +241,7 @@ const Dashboard = ({ isAnimationActive = true, defaultIndex = undefined }) => {
         label2=""
       />
 
-      <div className="w-full grid gap-4 p-[30px] ">
+      <div className="w-full grid gap-4 p-7.5 ">
         {/* section 1 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ">
           {Flex.map((item) => (

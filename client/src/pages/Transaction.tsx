@@ -1,17 +1,13 @@
 // import React from "react";
-import { IoNotifications } from "react-icons/io5";
 import NavbarComponent from "../components/Navbar/NavbarComponent";
 import Button from "../shared/Button";
 import {
-  IoIosArrowDown,
-  IoIosArrowUp,
   IoIosSearch,
   IoMdArrowDown,
   IoMdArrowUp,
 } from "react-icons/io";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { ImSearch } from "react-icons/im";
-import hamburg from "../assets/sous-vide-hamburger-header-og.jpg";
 import Modal from "../shared/Modal";
 import { useState } from "react";
 import {
@@ -20,13 +16,13 @@ import {
   MdOutlineCancel,
 } from "react-icons/md";
 
-interface mockData {
-  id: string;
-  thumbnail: string;
-  category: string;
-  date: string;
-  amount: string;
-}
+// interface mockData {
+//   id: string;
+//   thumbnail: string;
+//   category: string;
+//   date: string;
+//   amount: string;
+// }
 
 interface modalCategory {
   thumbnail: string;
@@ -34,22 +30,22 @@ interface modalCategory {
 }
 const Transaction = () => {
   const [transactionModal, setTransactionModal] = useState(false);
-  const mockData = [
-    {
-      id: 1,
-      thumbnail: "hamburg",
-      category: "Food",
-      date: "May 11, 2026",
-      amount: "#3,000",
-    },
-    {
-      id: 2,
-      thumbnail: "hamburg",
-      category: "Transport",
-      date: "May 10, 2026",
-      amount: "#2000",
-    },
-  ];
+  // const mockData = [
+  //   {
+  //     id: 1,
+  //     thumbnail: "hamburg",
+  //     category: "Food",
+  //     date: "May 11, 2026",
+  //     amount: "#3,000",
+  //   },
+  //   {
+  //     id: 2,
+  //     thumbnail: "hamburg",
+  //     category: "Transport",
+  //     date: "May 10, 2026",
+  //     amount: "#2000",
+  //   },
+  // ];
 
   const Flex: modalCategory[] = [
     {
@@ -254,10 +250,10 @@ const Transaction = () => {
       </Modal>
 
       <div className="bg-[#121218] rounded-lg mt-2">
-        <div className="pt-[10px] flex flex-col ">
+        <div className="pt-2.5 flex flex-col ">
           <div className="p-1 text-white  bg-[#121219] rounded-lg">
             <div className=" p-2   rounded-lg  flex items-center gap-3">
-              <div className=" items-center gap-2 w-[280px] p-2 flex border border-white/5 rounded-lg ">
+              <div className=" items-center gap-2 w-70 p-2 flex border border-white/5 rounded-lg ">
                 <IoIosSearch />
                 <input
                   type="text"
@@ -266,7 +262,7 @@ const Transaction = () => {
                 />
               </div>
 
-              <div className="w-[40px] h-[30px] flex justify-center  rounded-full border border-[#8779D2] items-center">
+              <div className="w-10 h-7.5 flex justify-center  rounded-full border border-[#8779D2] items-center">
                 <span className="text-[13px] text-[#8779D2]">All</span>
               </div>
 
@@ -341,14 +337,14 @@ const Transaction = () => {
               <span className="text-[#393854]">transactions</span>
             </div>
 
-            <div className="flex gap-[10px] ">
+            <div className="flex gap-2.5 ">
               <div className="text-[#2B9372] flex items-center ">
                 <IoMdArrowUp />
                 <span>#0</span>
               </div>
             </div>
 
-            <div className="flex gap-[10px] ">
+            <div className="flex gap-2.5 ">
               <div className="text-[#994355] flex items-center ">
                 <IoMdArrowDown />
                 <span>#0</span>
@@ -378,7 +374,7 @@ const Transaction = () => {
             <hr className="border-white/5 mx-2" />
           </div>
 
-          <div className="items-center p-[250px] justify-center flex flex-col text-[12px]">
+          <div className="items-center p-62.5 justify-center flex flex-col text-[12px]">
             <div className="text-[50px] text-[#232329]">
               <ImSearch />
             </div>

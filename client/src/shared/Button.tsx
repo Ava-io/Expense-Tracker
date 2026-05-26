@@ -1,16 +1,15 @@
-import { Children, type ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface ButtonProps {
   children: React.ReactNode;
-  bgColor?: string;
+  // bgColor?: string;
   onClick?: () => void;
   className?: string;
   size?: string;
 }
 
-const Button = ({ onClick, children, bgColor, className }: ButtonProps) => {
-  const navigate = useNavigate();
+const Button = ({ onClick, children, className }: ButtonProps) => {
+  // const navigate = useNavigate();
   return (
     <button
       onClick={onClick}

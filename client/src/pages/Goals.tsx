@@ -21,9 +21,9 @@ interface Goals {
 }
 
 const Goals = () => {
-  const [modal, setModal] = useState(false);
-  const [goalModal, setGoalModal] = useState(true);
-  const [buttonModal, setButtonModal] = useState(true);
+  // const [modal, setModal] = useState(false);
+  const [goalModal, setGoalModal] = useState(false);
+  // const [buttonModal, setButtonModal] = useState(true);
 
   const Flex: Goals[] = [
     {
@@ -57,6 +57,8 @@ const Goals = () => {
       percentageSaved: 40,
     },
   ];
+
+
   return (
     <div className="p-3 h-screen">
       <div>
@@ -77,7 +79,7 @@ const Goals = () => {
             <div>
               <Button
                 className="border border-white/5 rounded-lg bg-[#1A1B22] p-4 "
-                onClick={() => setGoalModal(!modal)}
+                
               >
                 <MdOutlineCancel className="text-[14px] text-white" />
               </Button>
@@ -176,7 +178,7 @@ const Goals = () => {
         </div>
       </Modal>
 
-      <div className="grid w-full gap-4 p-[30px]">
+      <div className="grid w-full gap-4 p-7.5">
         {/* Grid div */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {Flex.map((item) => (
@@ -206,12 +208,12 @@ const Goals = () => {
 
               <div>
                 {item.savedSofar > 0 ? (
-                  <div className="space-y-2 items-center justify-center flex mt-[12px]">
+                  <div className="space-y-2 items-center justify-center flex mt-3">
                     <div className=" size-20  bg-white/10 rounded-full items-center flex justify-center overflow-hidden">
                       <motion.div
                         initial={{ width: 1 }}
                         whileInView={{ width: `${item.percentageSaved}%` }}
-                        viewPort={{ once: true }}
+                        // viewPort={{ once: true }}
                         transition={{ duration: 1, delay: 0.5 }}
                         className=" bg-green-500 size-12 rounded-full  "
                       />
