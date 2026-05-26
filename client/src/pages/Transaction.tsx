@@ -12,6 +12,13 @@ import {
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { ImSearch } from "react-icons/im";
 import hamburg from "../assets/sous-vide-hamburger-header-og.jpg";
+import Modal from "../shared/Modal";
+import { useState } from "react";
+import {
+  MdArrowDownward,
+  MdArrowUpward,
+  MdOutlineCancel,
+} from "react-icons/md";
 
 interface mockData {
   id: string;
@@ -20,7 +27,13 @@ interface mockData {
   date: string;
   amount: string;
 }
+
+interface modalCategory {
+  thumbnail: string;
+  category: string;
+}
 const Transaction = () => {
+  const [transactionModal, setTransactionModal] = useState(false);
   const mockData = [
     {
       id: 1,
@@ -37,6 +50,65 @@ const Transaction = () => {
       amount: "#2000",
     },
   ];
+
+  const Flex: modalCategory[] = [
+    {
+      thumbnail: "🍔",
+      category: "Food",
+    },
+    {
+      thumbnail: "🚗",
+      category: "Transport",
+    },
+    {
+      thumbnail: "🏠",
+      category: "Housing",
+    },
+    {
+      thumbnail: "💊",
+      category: "Health",
+    },
+    {
+      thumbnail: "🎮",
+      category: "Fun",
+    },
+    {
+      thumbnail: "🛍️",
+      category: "Shopping",
+    },
+    {
+      thumbnail: "📚",
+      category: "Education",
+    },
+    {
+      thumbnail: "💡",
+      category: "Utilities",
+    },
+    {
+      thumbnail: "💵",
+      category: "Salary",
+    },
+    {
+      thumbnail: "💻",
+      category: "Freelance",
+    },
+    {
+      thumbnail: "📈",
+      category: "Business",
+    },
+    {
+      thumbnail: "🎁",
+      category: "Gift",
+    },
+    {
+      thumbnail: "💰",
+      category: "Savings",
+    },
+    {
+      thumbnail: "⌾",
+      category: "Others",
+    },
+  ];
   return (
     <div className="p-3 h-screen ">
       <div>
@@ -47,8 +119,139 @@ const Transaction = () => {
           showExport={true}
           label="Add"
           label2="Export CSV"
+          onClick={() => setTransactionModal(true)}
         />
       </div>
+
+      <Modal isOpen={transactionModal}>
+        <div className="p-6 bg-[#131319] rounded-lg border border-white/5">
+          <div className="justify-between flex">
+            <div>
+              <h1 className="text-white">New Transaction</h1>
+            </div>
+
+            <div>
+              <Button
+                className="border border-white/5 rounded-lg p-4 bg-[#1A1B22]"
+                onClick={() => setTransactionModal(!transactionModal)}
+              >
+                <MdOutlineCancel className="text-[14px] text-white" />
+              </Button>
+            </div>
+          </div>
+
+          <div className="border border-white/5 p-1 grid grid-cols-2 gap-2 rounded-lg bg-[#131319] mt-2 ">
+            <div className="  hover:bg-[#31212B] group flex gap-1 items-center justify-center  rounded-lg col-span-1 p-2  ">
+              <div className="  text-[#8779D2]  group-hover:text-[#7C3B4B]">
+                <MdArrowDownward />
+              </div>{" "}
+              <h1 className="text-[#8779D2] text-[12px] group-hover:text-[#7C3B4B] ">
+                Expense
+              </h1>
+            </div>
+
+            <div className="  hover:bg-[#1F2E2F] group flex gap-1 items-center justify-center  rounded-lg col-span-1 p-2  ">
+              <div className="  text-[#8779D2]  group-hover:text-[#2A6D5B]">
+                <MdArrowUpward />
+              </div>{" "}
+              <h1 className="text-[#8779D2] text-[12px] group-hover:text-[#2A6D5B] ">
+                Income
+              </h1>
+            </div>
+          </div>
+
+          <div className="gap-2 mt-3">
+            <form className="mt-2 w-full grid grid-cols-2 gap-2">
+              <div className="col-span-2 w-full">
+                <label className="text-[#8779D2] text-[10px]">AMOUNT</label>
+
+                <input
+                  type="number"
+                  placeholder="0.00"
+                  className="p-2 border text-[12px] text-[#8779D2] rounded-lg w-full border-white/5 bg-[#212127]"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="col-span-2">
+                    <label className="text-[#8779D2] text-[10px] ">
+                      DESCRIPTION
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="What was this for?"
+                      className="p-2 border text-[12px] text-[#8779D2] rounded-lg w-full border-white/5 bg-[#212127]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-span-2">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="col-span-1">
+                    <label className="text-[#8779D2] text-[10px]">DATE</label>
+                    <input
+                      type="date"
+                      placeholder="22/05/2026"
+                      className="p-2 border text-[12px] text-[#8779D2] rounded-lg w-full border-white/5 bg-[#212127]"
+                    />
+                  </div>
+
+                  <div className="col-span-1">
+                    <label className="text-[#8779D2] text-[10px]">
+                      NOTE(OPTIONAL)
+                    </label>
+
+                    <input
+                      type="text"
+                      placeholder="Extra details..."
+                      className="p-2 border text-[12px] text-[#8779D2] rounded-lg w-full border-white/5 bg-[#212127]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-span-2">
+                <label className="text-[#8779D2] text-[10px]">CATEGORY</label>
+                <div className="grid grid-cols-4 gap-2">
+                  {Flex.map((item) => (
+                    <div className="border hover:border-[#8779D2] hover:bg-[#211F38] group w-full p-3 rounded-md  flex flex-col border-white/5 bg-[#212127] items-center">
+                      <div>
+                        <span>{item.thumbnail}</span>
+                      </div>
+                      <div className="">
+                        <h1 className="text-[#8779D2] text-[10px] group-hover:text-white ">
+                          {item.category}
+                        </h1>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </form>
+
+            <div className="col-span-2 ">
+              <div className="grid grid-cols-2 mt-1 gap-4 ">
+                <div className="col-span-1">
+                  <Button
+                    className="border border-white/5 w-full  rounded-lg bg-[#212127] p-4 space-y-2"
+                    onClick={() => setTransactionModal(false)}
+                  >
+                    <h1 className="text-[#8779D2]">Cancel</h1>
+                  </Button>
+                </div>
+
+                <div className="col-span-1">
+                  <Button className="border w-full border-white/5 rounded-lg bg-[#8779D2] p-4 space-y-2">
+                    Add Transaction
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
 
       <div className="bg-[#121218] rounded-lg mt-2">
         <div className="pt-[10px] flex flex-col ">

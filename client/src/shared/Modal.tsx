@@ -1,11 +1,24 @@
-import { useState, type ReactElement } from "react";
+import { useState, type ReactElement, type ReactNode } from "react";
 
 interface ModalProps {
-  setOpenModal: any;
+  children: ReactNode;
+  onClick?: () => void;
+  isOpen: boolean;
 }
 
-const modal = ({ setOpenModal }: ModalProps) => {
-  return <div></div>;
+const Modal = ({ children, isOpen }: ModalProps) => {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0  z-50 flex items-center justify-center bg-black/50 rounded-lg">
+      <div className=" relative bg-white text-black w-md rounded-md">
+        {/* <h1>Do you want to allow downloads on "" </h1> */}
+        {children}
+        {/* <button className="text-black" onClick={onClick}>
+          Cancle
+        </button> */}
+      </div>
+    </div>
+  );
 };
 
-export default modal;
+export default Modal;

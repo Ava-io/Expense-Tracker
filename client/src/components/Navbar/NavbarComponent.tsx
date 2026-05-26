@@ -12,6 +12,7 @@ interface NavBarProps {
   showExport?: boolean;
   label?: string;
   label2?: string;
+  onClick?: () => void;
 }
 
 const NavbarComponent = ({
@@ -21,6 +22,7 @@ const NavbarComponent = ({
   showExport,
   label,
   label2,
+  onClick,
 }: NavBarProps) => {
   const [mobile, setMobile] = useState(false);
   useEffect(() => {
@@ -29,7 +31,6 @@ const NavbarComponent = ({
     window.addEventListener("resize", handleResize);
   }, []);
 
-  
   return (
     <>
       <div className="bg-none px-[30px] flex gap-4 h-16 justify-between items-center">
@@ -39,36 +40,38 @@ const NavbarComponent = ({
             <h1>{pathTitle}</h1>
           </div>
 
-         {mobile ?(
-          <div className="text-white">hello</div>
-         ):(
-           <div>
-            {showDash && (
-              <div className="flex items-center gap-3">
-                <div>
-                  <span className="text-[12px] text-[#594EAF]">April 2026</span>
-                </div>
-
-                <div className="group">
-                  <Button className="border border-gray-100/20 bg-transparent ">
-                    <IoCalendarNumber className="text-[#946ACC] group-hover:text-white" />
-                    <span className="text-[#594EAF] group-hover:text-white">
-                      {" "}
-                      Period
+          {mobile ? (
+            <div className="text-white">work on it</div>
+          ) : (
+            <div>
+              {showDash && (
+                <div className="flex items-center gap-3">
+                  <div>
+                    <span className="text-[12px] text-[#594EAF]">
+                      April 2026
                     </span>
-                  </Button>
-                </div>
+                  </div>
 
-                <div>
-                  <Button className="bg-[#946ACC] hover:bg-[#b37ffb]">
-                    <LuPlus className="text-lg" />
-                    {label}
-                  </Button>
+                  <div className="group">
+                    <Button className="border border-gray-100/20 bg-transparent ">
+                      <IoCalendarNumber className="text-[#946ACC] group-hover:text-white" />
+                      <span className="text-[#594EAF] group-hover:text-white">
+                        {" "}
+                        Period
+                      </span>
+                    </Button>
+                  </div>
+
+                  <div>
+                    <Button className="bg-[#946ACC] hover:bg-[#b37ffb]">
+                      <LuPlus className="text-lg" />
+                      {label}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-         )}
+              )}
+            </div>
+          )}
         </div>
         <div className="flex  items-center">
           <div className="p-4">
@@ -86,7 +89,10 @@ const NavbarComponent = ({
           <div>
             {showExport && (
               <div>
-                <Button className="bg-[#946ACC] hover:bg-[#b37ffb]">
+                <Button
+                  onClick={onClick}
+                  className="bg-[#946ACC] hover:bg-[#b37ffb]"
+                >
                   <LuPlus className="text-lg" />
                   {label}
                 </Button>
