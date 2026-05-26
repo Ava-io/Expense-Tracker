@@ -15,8 +15,9 @@
 //   // Tooltip,
 //   // TooltipIndex,
 // } from "recharts";
-
+import Modal from "../shared/Modal";
 import NavbarComponent from "../components/Navbar/NavbarComponent";
+import { useState } from "react";
 
 // const Dashboard = ({ isAnimationActive = true, defaultIndex = undefined }) => {
 
@@ -169,7 +170,8 @@ import {
 import PieChartCom from "../components/pieChart";
 import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
-import { MdArrowRightAlt } from "react-icons/md";
+import { MdArrowRightAlt, MdOutlineCancel } from "react-icons/md";
+import { TbCurrencyNaira } from "react-icons/tb";
 // import { useEffect, useState } from "react";
 
 interface DashboardProps {
@@ -180,6 +182,8 @@ interface DashboardProps {
   bgGradientColor: string;
 }
 const Dashboard = ({ isAnimationActive = true}) => {
+    const [goalModal, setGoalModal] = useState(false);
+  
   const Flex: DashboardProps[] = [
     {
       title: "NET BALANCE",
@@ -241,6 +245,112 @@ const Dashboard = ({ isAnimationActive = true}) => {
         label2=""
       />
 
+      <Modal isOpen={goalModal}>
+        <div className="p-6 bg-[#131319] rounded-lg border border-white/5">
+          <div className="justify-between flex">
+            <div>
+              <h1 className="text-white">New Savings Goal</h1>
+            </div>
+
+            <div>
+              <Button className="border border-white/5 rounded-lg bg-[#1A1B22] p-4 ">
+                <MdOutlineCancel className="text-[14px] text-white" />
+              </Button>
+            </div>
+          </div>
+
+          <div className="gap-2">
+            <form className="mt-2 w-full grid grid-cols-2 gap-2">
+              <div className="col-span-2 w-full">
+                <label className="text-[#8779D2] text-[13px] ">GOAL NAME</label>
+                <input
+                  type="text"
+                  placeholder="e.g Emergency Fund, New Laptop"
+                  className="p-2 border text-[12px] text-[#8779D2] rounded-lg w-full border-white/5 bg-[#212127]"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="col-span-1">
+                    <label className="text-[#8779D2] text-[13px]">
+                      TARGET AMOUNT
+                    </label>
+                    <div className="relative">
+                      <TbCurrencyNaira className=" text-[#8779D2] absolute top-2 left-2" />
+
+                      <input
+                        type="number"
+                        placeholder="500000"
+                        className="px-8 py-2 border text-[12px] text-[#8779D2] rounded-lg  w-full border-white/5 bg-[#212127]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-span-1">
+                    <label className="text-[#8779D2] text-[13px]">
+                      SAVED SO FAR
+                    </label>
+                    <div>
+                      <input
+                        type="number"
+                        placeholder="500000"
+                        className="p-2 border text-[12px] w-full text-[#8779D2] rounded-lg border-white/5 bg-[#212127]"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-span-2">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="col-span-1">
+                    <label className="text-[#8779D2] text-[13px]">
+                      DEADLINE
+                    </label>
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="20/08/2026"
+                        className="p-2 border text-[12px] w-full text-gray-300 rounded-lg  border-white/5 bg-[#212127]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-span-1">
+                    <label className="text-[#8779D2] text-[13px]">ICON</label>
+                    <input
+                      type="text"
+                      placeholder="Goal"
+                      className="p-2 border text-[12px] w-full text-gray-300 rounded-lg border-white/5 bg-[#212127]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div className="col-span-2 ">
+            <div className="grid grid-cols-2 mt-2 gap-4 ">
+              <div className="col-span-1">
+                <Button
+                  className="border border-white/5 w-full rounded-lg bg-[#212127] p-4 space-y-2"
+                  onClick={() => setGoalModal(false)}
+                >
+                  Cancel
+                </Button>
+              </div>
+
+              <div className="col-span-1">
+                <Button className="border w-full border-white/5 rounded-lg bg-[#8779D2] p-4 space-y-2">
+                  Create Goal
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
       <div className="w-full grid gap-4 p-7.5 ">
         {/* section 1 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ">
@@ -273,7 +383,7 @@ const Dashboard = ({ isAnimationActive = true}) => {
         <div className="w-full grid grid-cols-1 md:grid-cols-5 gap-4">
           {/* Bar chart */}
 
-          <div className="w-full col-span-1  md:col-span-4 border bg-[#131218]  text-white border-white/5  rounded-lg gap-2 px-[10px] flex-1 flex flex-col ">
+          <div className="w-full col-span-1  md:col-span-4 border bg-[#131218]  text-white border-white/5  rounded-lg gap-2 px-2.5 flex-1 flex flex-col ">
             <div className="">
               <h1 className="text-[14.5px] font-sans"> Income vs Expenses</h1>
               <span className="text-[11px] text-[#8779D2]">
@@ -365,7 +475,7 @@ const Dashboard = ({ isAnimationActive = true}) => {
               </Button>
             </div>
           </div>
-          <div className="items-center justify-center align-center flex min-h-[250px] h-full flex-col">
+          <div className="items-center justify-center align-center flex min-h-62.5 h-full flex-col">
             <h1 className="text-[#8779D2] text-[12px]">No transactions yet </h1>
             <span className="text-[#8779D2] text-[12px]">
               Add your first one to get started
