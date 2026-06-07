@@ -4,21 +4,67 @@ import Analytics from "./pages/Analytics";
 import Budget from "./pages/Budget";
 import Category from "./pages/Category";
 import Goals from "./pages/Goals";
-// import SigninComponents from "./components/Signin/SigninComponents";
-// import LoginComponents from "./components/Login/LoginComponents";
+import SigninComponents from "./components/Signin/SigninComponents";
+import LoginComponents from "./components/Login/LoginComponents";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
+import { useEffect, useState } from "react";
 
 const App = () => {
+  // const [theme, setTheme] = useState(() => {
+  //   const savedTheme = localStorage.getItem("theme");
+  //   return savedTheme || "light";
+  // });
+  // useEffect(() => {
+  //   const root = window.document.documentElement;
+
+  //   if (theme === "dark") {
+  //     root.classList.add("dark");
+  //     localStorage.setItem("theme", "dark");
+  //   } else {
+  //     root.classList.remove("dark");
+  //     root.classList.add("light");
+  //     localStorage.setItem("theme", "light");
+  //   }
+  // }, [theme]);
+
+  // const setDark = () => {
+  //   localStorage.setItem("theme", "dark");
+  //   setTheme("dark");
+  // };
+  // const setLight = () => {
+  //   localStorage.setItem("theme", "light");
+  //   setTheme("light");
+  // };
+
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  // One single toggle function instead of two
+  // const toggleTheme = () => {
+  //   setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  // };
+
   return (
     <div className="bg-gray-400 font-sans">
+      {/* <button className=" text-amber-300" onClick={toggleTheme}>
+        dark test
+      </button>
+      <button className=" text-amber-300" onClick={toggleTheme}>
+        light test
+      </button> */}
       <Routes>
         <Route>
-          {/* <Route path="/" element={<SigninComponents />} /> 
-          <Route path="/" element={<LoginComponents />} />  */}
+          <Route path="/signup" element= {<SigninComponents />} /> 
+          // <Route path="/login" element={<LoginComponents />} />  */
 
-          <Route element={<DashboardLayout /> }>
+          <Route element={<DashboardLayout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/budget" element={<Budget />} />
@@ -34,4 +80,3 @@ const App = () => {
 };
 
 export default App;
-

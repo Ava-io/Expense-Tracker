@@ -55,8 +55,48 @@ export const createTransactionService = async (req, res) => {
 // Get all
 export const getTransactions = async (req, res) => {
   try {
-    const getTransactions = await pool.query(`SELECT * FROM transactions`);
-    console.log(getTransactions.rows);
+    let { page = 1, perPage = 10, search, category, subCategory } = req.query;
+    page = Math.max(1, parseInt(page) || 1);
+    perPage = Math.min(100, parseInt(perPage) || 10);
+    let offset = (page - 1) * perPage;
+
+    console.log("check", page, perPage);
+    const conditions = [];
+    const params = [];
+    let paramIndex = 1;
+
+    if (search) {
+      conditions.push(`transaction ILIKE $${paramIndex}`);
+      params.push(`%${search}%`);
+      paramIndex++;
+    }
+
+    if (category) {
+      conditions.push(`category_id ILIKE $${paramIndex}`);
+      params.push(`%${category}%`);
+      paramIndex++;
+    }
+
+    if (subCategory) {
+      conditions.push(`sub_category ILIKE $${paramIndex}`);
+      params.push(`%${subCategory}%`);
+      paramIndex++;
+    }
+
+    const whereClause =
+      conditions.length > 0 ? `WHERE ${conditions.join(" AND")} ` : "";
+    console.log("whereee", whereClause);
+
+    const getTransactions = await pool.query(
+      `
+      SELECT * FROM transactions ${whereClause}
+      ORDER BY created_at DESC
+      LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
+      `,
+      [...params, perPage, offset],
+    );
+    console.log("whereee", whereClause);
+    console.log(getTransactions);
 
     return successResponse(
       res,

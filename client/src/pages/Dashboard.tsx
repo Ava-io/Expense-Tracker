@@ -153,14 +153,147 @@ const Dashboard = ({ isAnimationActive = true }) => {
         showExport={false}
         label="Add Transaction"
         label2=""
-        buttonClick={()=>setTransactionModal(true)}
+        buttonClick={() => setTransactionModal(true)}
       />
+
+      <div className="w-full grid gap-4 p-7.5 ">
+        {/* section 1 */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ">
+          {Flex.map((item) => (
+            <div
+              className={`border w-full p-3 rounded-lg ${item.bgGradientColor}  flex flex-col border-white/5`}
+            >
+              <div className="flex flex-col  p-2 gap-2 text-white">
+                <div className="flex items-center gap-1">
+                  <div className={`size-2 rounded-full `} />
+                  <h1 className="text-[10px] text-[#8779D2] font-syne">
+                    {item.title}
+                  </h1>
+                </div>
+                <span
+                  className={`"text-[#8779D2] font-bold text-[24px] font-syne ${item.color}`}
+                >
+                  {item.amount}
+                </span>
+                <div className="text-[10.5px] font-sans">
+                  <span className="border border-white/5 rounded-lg p-1 bg-[#272636] text-[#8779D2]">
+                    {item.data}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* section 2 */}
+        <div className="w-full grid grid-cols-1 md:grid-cols-5 gap-4">
+          {/* Bar chart */}
+
+          <div className="w-full col-span-1  md:col-span-4 border bg-[#131218]  text-white border-white/5  rounded-lg gap-2 px-[10px] flex-1 flex flex-col ">
+            <div className="">
+              <h1 className="text-[14.5px] font-sans"> Income vs Expenses</h1>
+              <span className="text-[11px] text-[#8779D2] dark:text-amber-700">
+                6-months overview
+              </span>
+            </div>
+
+            <div className=" w-full relative ">
+              <BarChart
+                style={{
+                  width: "100%",
+                  // maxWidth: "1000px",
+                  maxHeight: "30vh",
+                  aspectRatio: 1.618,
+                }}
+                responsive
+                data={data}
+              >
+                <CartesianGrid
+                  stroke="#e5e7eb"
+                  strokeWidth={0.2}
+                  strokeOpacity={0.3}
+                  vertical={true}
+                />
+                <XAxis dataKey="name" />
+                <YAxis width="auto" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#131218",
+                    border: "none",
+                    borderRadius: "8px",
+                    padding: "6px 10px 0px",
+                  }}
+                  cursor={false}
+                />
+                <Legend
+                  verticalAlign="top"
+                  align="right"
+                  wrapperStyle={{ paddingBottom: "20px", fontSize: "11px" }}
+                />
+                <Bar
+                  dataKey="income"
+                  fill="#2C9675"
+                  isAnimationActive={isAnimationActive}
+                  radius={[10, 10, 0, 0]}
+                  animationDuration={800}
+                  animationEasing={"ease-out"}
+                />
+                <Bar
+                  dataKey="expense"
+                  fill="#5A4EAF"
+                  radius={[10, 10, 0, 0]}
+                  isAnimationActive={isAnimationActive}
+                  animationDuration={800}
+                  animationEasing={"ease-out"}
+                />
+              </BarChart>
+            </div>
+          </div>
+
+          {/* PIE CHART */}
+
+          <div className="p-6  col-span-1 border border-white/4 rounded-lg w-full bg-secondary">
+            <h1 className="text-white text-[17px] font-bold"> By Category</h1>
+            <span className="text-[#8779D2] text-[12px]">
+              Expense Breakdown
+            </span>
+            <PieChartCom />
+          </div>
+        </div>
+
+        {/* section 3 */}
+        <div className="p-6 bg-secondary border border-white/5 rounded-lg">
+          <div className="justify-between flex">
+            <div className="flex flex-col ">
+              <h1 className="text-white text-[17px]">Recent Transactions</h1>
+              <span className="text-[#8779D2] text-[10px]">
+                0 total transactions
+              </span>
+            </div>
+
+            <div className="gap-1">
+              <Button
+                className="border-white/5 items-center rounded-lg border text-[#8779D2]"
+                onClick={() => navigate("/transactions")}
+              >
+                <h1 className="text-[#8779D2]">View all</h1>
+                <MdArrowRightAlt className="text-[15px] text-[#8779D2]" />
+              </Button>
+            </div>
+          </div>
+          <div className="items-center justify-center align-center flex min-h-[250px] h-full flex-col">
+            <h1 className="text-[#8779D2] text-[12px]">No transactions yet </h1>
+            <span className="text-[#8779D2] text-[12px]">
+              Add your first one to get started
+            </span>
+          </div>
+        </div>
+      </div>
 
       <Modal isOpen={transactionModal}>
         <div className="p-6 bg-[#131319] rounded-lg border border-white/5">
           <div className="justify-between flex">
             <div>
-              <h1 className="text-white">New Transaction</h1>
+              <h1 className="text-white dark:text-red-300">New Transaction</h1>
             </div>
 
             <div>
@@ -285,139 +418,6 @@ const Dashboard = ({ isAnimationActive = true }) => {
           </div>
         </div>
       </Modal>
-
-      <div className="w-full grid gap-4 p-7.5 ">
-        {/* section 1 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ">
-          {Flex.map((item) => (
-            <div
-              className={`border w-full p-3 rounded-lg ${item.bgGradientColor}  flex flex-col border-white/5`}
-            >
-              <div className="flex flex-col  p-2 gap-2 text-white">
-                <div className="flex items-center gap-1">
-                  <div className={`size-2 rounded-full `} />
-                  <h1 className="text-[10px] text-[#8779D2] font-syne">
-                    {item.title}
-                  </h1>
-                </div>
-                <span
-                  className={`"text-[#8779D2] font-bold text-[24px] font-syne ${item.color}`}
-                >
-                  {item.amount}
-                </span>
-                <div className="text-[10.5px] font-sans">
-                  <span className="border border-white/5 rounded-lg p-1 bg-[#272636] text-[#8779D2]">
-                    {item.data}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        {/* section 2 */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-5 gap-4">
-          {/* Bar chart */}
-
-          <div className="w-full col-span-1  md:col-span-4 border bg-[#131218]  text-white border-white/5  rounded-lg gap-2 px-[10px] flex-1 flex flex-col ">
-            <div className="">
-              <h1 className="text-[14.5px] font-sans"> Income vs Expenses</h1>
-              <span className="text-[11px] text-[#8779D2]">
-                6-months overview
-              </span>
-            </div>
-
-            <div className=" w-full relative ">
-              <BarChart
-                style={{
-                  width: "100%",
-                  // maxWidth: "1000px",
-                  maxHeight: "30vh",
-                  aspectRatio: 1.618,
-                }}
-                responsive
-                data={data}
-              >
-                <CartesianGrid
-                  stroke="#e5e7eb"
-                  strokeWidth={0.2}
-                  strokeOpacity={0.3}
-                  vertical={true}
-                />
-                <XAxis dataKey="name" />
-                <YAxis width="auto" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#131218",
-                    border: "none",
-                    borderRadius: "8px",
-                    padding: "6px 10px 0px",
-                  }}
-                  cursor={false}
-                />
-                <Legend
-                  verticalAlign="top"
-                  align="right"
-                  wrapperStyle={{ paddingBottom: "20px", fontSize: "11px" }}
-                />
-                <Bar
-                  dataKey="income"
-                  fill="#2C9675"
-                  isAnimationActive={isAnimationActive}
-                  radius={[10, 10, 0, 0]}
-                  animationDuration={800}
-                  animationEasing={"ease-out"}
-                />
-                <Bar
-                  dataKey="expense"
-                  fill="#5A4EAF"
-                  radius={[10, 10, 0, 0]}
-                  isAnimationActive={isAnimationActive}
-                  animationDuration={800}
-                  animationEasing={"ease-out"}
-                />
-              </BarChart>
-            </div>
-          </div>
-
-          {/* PIE CHART */}
-
-          <div className="p-6  col-span-1 border border-white/4 rounded-lg w-full bg-secondary">
-            <h1 className="text-white text-[17px] font-bold"> By Category</h1>
-            <span className="text-[#8779D2] text-[12px]">
-              Expense Breakdown
-            </span>
-            <PieChartCom />
-          </div>
-        </div>
-
-        {/* section 3 */}
-        <div className="p-6 bg-secondary border border-white/5 rounded-lg">
-          <div className="justify-between flex">
-            <div className="flex flex-col ">
-              <h1 className="text-white text-[17px]">Recent Transactions</h1>
-              <span className="text-[#8779D2] text-[10px]">
-                0 total transactions
-              </span>
-            </div>
-
-            <div className="gap-1">
-              <Button
-                className="border-white/5 items-center rounded-lg border text-[#8779D2]"
-                onClick={() => navigate("/transactions")}
-              >
-                <h1 className="text-[#8779D2]">View all</h1>
-                <MdArrowRightAlt className="text-[15px] text-[#8779D2]" />
-              </Button>
-            </div>
-          </div>
-          <div className="items-center justify-center align-center flex min-h-[250px] h-full flex-col">
-            <h1 className="text-[#8779D2] text-[12px]">No transactions yet </h1>
-            <span className="text-[#8779D2] text-[12px]">
-              Add your first one to get started
-            </span>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { FaPoundSign } from "react-icons/fa";
 import NavbarComponent from "../components/Navbar/NavbarComponent";
 import Button from "../shared/Button";
 import { ImArrowDown } from "react-icons/im";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../shared/Modal";
 import { BiBarChartSquare } from "react-icons/bi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
@@ -21,6 +21,7 @@ const Settings = () => {
   const [loadData, setLoadData] = useState(false);
   const [deleteData, setDeleteData] = useState(false);
 
+
   const [toggled, setToggled] = useState({
     budgetAlert: false,
     weeklySummary: false,
@@ -30,6 +31,20 @@ const Settings = () => {
     compactView: false,
     animation: false,
   });
+  
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  
+    useEffect(() => {
+      const root = window.document.documentElement;
+      root.classList.toggle("dark", theme === "dark");
+      localStorage.setItem("theme", theme);
+    }, [theme]);
+  
+    // One single toggle function instead of two
+    const toggleTheme = () => {
+      setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    };
+  
 
   return (
     <div className=" gap-4">
@@ -276,12 +291,14 @@ const Settings = () => {
             <hr className="text-white/8 mt-[10px]" />
 
             <div className="py-2 justify-between  flex">
-              <div>
-                <h1 className="text-[13px] text-white">Dark Mode</h1>
-                <span className="text-[#8779D2] text-[12px]">
-                  Currently active
-                </span>
-              </div>
+             
+                <div>
+                  <h1 className="text-[13px] text-white">Dark Mode</h1>
+                  <span className="text-[#8779D2] text-[12px]">
+                    Currently active
+                  </span>
+                </div>
+             
 
               <motion.div>
                 <div

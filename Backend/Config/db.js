@@ -6,13 +6,9 @@ import { createGoalTable } from "../Model/createGoalTable.js";
 import { createUsersTable } from "../Model/createUsersTable.js";
 import { createCategoryTable } from "../Model/createCategoryTable.js";
 import {
+  addColumns,
   addSubCategory,
   addSubCategoryColumn,
-  // removeCategoryColumn,
-  // addCategoryColumn,
-  // addTransactionCategoryColumn,
-  // removeSubCategoryColumn,
-  // removeTransactionCategoryColumn,
 } from "../Model/createAltertable.js";
 import { createSubCategoryTable } from "../Model/createSubCategoryTable.js";
 
@@ -71,6 +67,9 @@ export const initDb = async () => {
 
     await client.query(addSubCategory);
     console.log("sub_category added successfully");
+
+    await client.query(addColumns);
+    console.log("columns added successfully to users");
 
     // console.log("catge");
   } catch (error) {
