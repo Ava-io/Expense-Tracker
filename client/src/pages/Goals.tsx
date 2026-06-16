@@ -34,7 +34,7 @@ const Goals = () => {
       amountLeft: 380000,
       description: "115 days left",
       bgThumbail: "bg-[#211E36]",
-      percentageSaved: 24,
+      percentageSaved: 80,
     },
     {
       thumbnail: "💻",
@@ -58,6 +58,12 @@ const Goals = () => {
     },
   ];
 
+  const radius = 45;
+
+  const circumference = 2 * Math.PI * radius;
+
+  const strokeDashoffset =
+    circumference - (Flex.percentageSaved / 100) * circumference;
 
   return (
     <div className="p-3 h-screen">
@@ -77,10 +83,7 @@ const Goals = () => {
             </div>
 
             <div>
-              <Button
-                className="border border-white/5 rounded-lg bg-[#1A1B22] p-4 "
-                
-              >
+              <Button className="border border-white/5 rounded-lg bg-[#1A1B22] p-4 ">
                 <MdOutlineCancel className="text-[14px] text-white" />
               </Button>
             </div>
@@ -208,15 +211,36 @@ const Goals = () => {
 
               <div>
                 {item.savedSofar > 0 ? (
-                  <div className="space-y-2 items-center justify-center flex mt-3">
-                    <div className=" size-20  bg-white/10 rounded-full items-center flex justify-center overflow-hidden">
-                      <motion.div
-                        initial={{ width: 1 }}
-                        whileInView={{ width: `${item.percentageSaved}%` }}
-                        // viewPort={{ once: true }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className=" bg-green-500 size-12 rounded-full  "
+                  <div className="relative size-20 ">
+                    <svg
+                      className="w-full h-full -rotate-90"
+                      viewBox="0 0 100 100"
+                    >
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r={45}
+                        fill="none"
+                        stroke="#E5E7EB"
+                        strokeWidth="8"
                       />
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r={45}
+                        fill="none"
+                        stroke="#3B82F6"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        strokeDasharray={`${item.percentageSaved}%`}
+                        strokeDashoffset={strokeDashoffset}
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-xl font-bold">
+                        {" "}
+                        {item.percentageSaved}%
+                      </div>
                     </div>
                   </div>
                 ) : (

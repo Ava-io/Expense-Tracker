@@ -9,7 +9,7 @@ import statsRoutes from "./Start/Route/startRoute.js";
 import subCatRoutes from "./Routes/User/subCategory.js";
 // import setRoutes from "./Routes/User/settings.js";
 import profRoutes from "./Routes/User/profile.js";
-import cors from "cors";
+// import cors from "cors";
 
 dotenv.config();
 
@@ -30,17 +30,23 @@ app.use("/api/v1/profile", profRoutes);
 // to configure or specify urls that can have access to this backend
 const allowedOrigins = [
   "https://expense-tracker-theta-three-18.vercel.app",
-  " http://localhost:5173/",
+  " http://localhost:5173",
 ];
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ["POST", "GET", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Authorization", "Content-Type"],
-  }),
-);
+// app.use(
+//   cors({
+//     origin: allowedOrigins,
+//     methods: ["POST", "GET", "PATCH", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Authorization", "Content-Type"],
+//   }),
+// );
 // app.use("/settings", setRoutes);
 // app.use("/user", user)
+
+app.post("/test",(req,res)=>{
+  res.status(200).json({
+    message:"working!!!"
+  })
+})
 
 app.listen(port, () => {
   console.log(`My server is running at https://localhost:${port}`);

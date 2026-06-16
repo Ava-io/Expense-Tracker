@@ -1,78 +1,140 @@
 import { useState } from "react";
 import Button from "../../shared/Button";
 import { Link } from "react-router-dom";
-import { FaDollarSign } from "react-icons/fa6";
+import { FaApple, FaDollarSign } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import axios from "axios";
+import { BsGoogle } from "react-icons/bs";
+import { GrGoogle } from "react-icons/gr";
 
 const LoginComponents = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [logIn, setLogIn] = useState(false);
 
+  const handleLogin = async () => {
+    const payload = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      console.log(payload);
+      const response = await axios.post("http://localhost:3001/test", payload);
+      console.log(response.data);
+      // toast.success(response.data.message)
+    } catch (error) {
+      console.log(error.response);
+      // toast.error(error.response.message)
+    }
+  };
+
   return (
     <div className="min h-screen  flex flex-col w-full md:flex-row ">
       {/* a div for the left side of login containing the user login details */}
-      <div className=" w-full md:w-1/2 h-full flex justify-center items-center bg-green-50 p-4">
-        {/* Card div */}
-        <div className="p-6 w-full max-w-md rounded-2xl bg-white">
-          <div className="items-center  p-2 flex flex-col">
-            <div className="text-4xl  border p-5 rounded-2xl text-white bg-green-900">
-              <FaDollarSign />
+      <div className="w-full md:w-1/2 flex justify-center items-center p-6">
+        <div className="w-full max-w-md rounded-2xl bg-[#0C0D14] shadow-2xl border border-white/5 overflow-hidden">
+          {/* Header */}
+          <div className="bg-[#14141B] p-6 flex flex-col items-center gap-3">
+            <div className="flex items-center gap-2 text-white">
+              <FaDollarSign className="text-sm text-[#8779D2]" />
+              <h1 className="text-lg font-bold tracking-wide">Spendly</h1>
             </div>
 
-            <div className=" space-y-3 text-center text-xl ">
-              <div className="pt-3">
-                <h1>Welcome back</h1>
-              </div>
-              <h2 className="text-[#373650]">
-                Log in to your Spendly Account{" "}
+            <div className="text-center space-y-1">
+              <h2 className="text-white text-xl font-semibold">
+                Start tracking in seconds
               </h2>
+              <p className="text-[#8779D2] text-xs opacity-80">
+                Set up your fully offline localized ledger keys
+              </p>
             </div>
+          </div>
 
-            {/* Login input field  or card widh */}
-            <div className="w-full gap-5  flex flex-col">
-              <div className="pt-2">
-                <label className=" ">Email</label>
+          {/* Form */}
+          <div className="p-6 space-y-5">
+            {/* Email */}
+            <div>
+              <label className="text-[#8779D2] text-xs">Email</label>
+              <div className="relative mt-1">
+                <MdEmail className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" />
                 <input
-                  type="text"
+                  type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  className="p-2 rounded-2xl border w-full text-gray-400 bg-green-50"
+                  placeholder="your@example.com"
+                  className="w-full bg-[#14141A] border border-white/10 rounded-xl pl-10 p-3 text-sm text-gray-200 outline-none focus:border-[#8779D2] focus:ring-2 focus:ring-[#8779D2]/20 transition"
                 />
               </div>
+            </div>
 
-              <div className="">
-                <label>Password</label>
+            {/* Password */}
+            <div>
+              <div className="flex justify-between items-center">
+                <label className="text-[#8779D2] text-xs">Password</label>
+                <span className="text-[#8779D2] text-xs hover:underline cursor-pointer">
+                  Forgot password?
+                </span>
+              </div>
+
+              <div className="relative mt-1">
+                <RiLockPasswordFill className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" />
                 <input
-                  type="text"
+                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="........"
-                  className="p-2 rounded-2xl border w-full text-gray-400 bg-green-50"
+                  placeholder="••••••••"
+                  className="w-full bg-[#14141A] border border-white/10 rounded-xl pl-10 p-3 text-sm text-gray-200 outline-none focus:border-[#8779D2] focus:ring-2 focus:ring-[#8779D2]/20 transition"
                 />
               </div>
+            </div>
 
-              <div className=" mt-5 flex gap-4 flex-col ">
-                {/* <Link to="/login"> */}
-                <Link to="/login">
-                  <Button
-                    className=" w-full border rounded-lg p-2 items-center border-white/5 bg-[#8779D2]"
-                    onClick={() => setLogIn(true)}
-                  >
-                    <span className="text-white group-hover:text-white font-bold">
-                      Create an account
-                    </span>
-                  </Button>
-                </Link>
-                {/* </Link> */}
-              </div>
+            {/* Primary Button */}
+            <button
+              onClick={handleLogin}
+              className="w-full bg-[#8779D2] hover:bg-[#7868c9] transition rounded-xl p-3 text-white font-semibold"
+            >
+              Sign into Account
+            </button>
 
-              <div className="flex gap-2 items-center justify-center">
-                <h1 className="text-green-900 ">Don't have an account?</h1>
-                <Link to="/signup">
-                  <h1 className="text-green-900"> Sign up</h1>
-                </Link>
-              </div>
+            {/* Divider */}
+            <div className="flex items-center gap-3">
+              <hr className="flex-1 border-white/10" />
+              <span className="text-[10px] text-white/30">OR</span>
+              <hr className="flex-1 border-white/10" />
+            </div>
+
+            {/* Social Buttons */}
+            <button
+              onClick={handleLogin}
+              className="w-full flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 transition rounded-xl p-3 text-white text-sm"
+            >
+              <GrGoogle className="text-white/60" />
+              Continue with Google
+            </button>
+
+            <button
+              onClick={handleLogin}
+              className="w-full flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 transition rounded-xl p-3 text-white text-sm"
+            >
+              <FaApple className="text-white/60 text-lg" />
+              Continue with Apple
+            </button>
+
+            {/* Guest */}
+            <button
+              onClick={handleLogin}
+              className="w-full border border-white/10 hover:border-[#8779D2]/40 transition rounded-xl p-3 text-white text-sm"
+            >
+              Continue as Guest
+            </button>
+
+            {/* Footer */}
+            <div className="text-center pt-2">
+              <span className="text-[#8779D2] text-xs cursor-pointer hover:underline">
+                Need an account? Sign up
+              </span>
             </div>
           </div>
         </div>

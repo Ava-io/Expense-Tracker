@@ -10,6 +10,10 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import ForgotPassword from "./components/Login/ForgotPassword";
+import Otp from "./components/Login/Otp";
+import SetPassword from "./components/Login/SetPassword";
 
 const App = () => {
   // const [theme, setTheme] = useState(() => {
@@ -53,6 +57,7 @@ const App = () => {
 
   return (
     <div className="bg-gray-400 font-sans">
+      <Toaster position="top-right" />
       {/* <button className=" text-amber-300" onClick={toggleTheme}>
         dark test
       </button>
@@ -61,8 +66,11 @@ const App = () => {
       </button> */}
       <Routes>
         <Route>
-          <Route path="/signup" element= {<SigninComponents />} /> 
-          // <Route path="/login" element={<LoginComponents />} />  */
+          <Route path="/signup" element={<SigninComponents />} />
+          <Route path="/login" element={<LoginComponents />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/otp" element={<Otp />} />
+          <Route path="setpassword" element={<SetPassword />} />
 
           <Route element={<DashboardLayout />}>
             <Route path="/" element={<Dashboard />} />

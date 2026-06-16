@@ -9,9 +9,9 @@ const SignupService = async (req, res) => {
   try {
     console.log(req.body);
 
-    const { first_name, last_name, email, phone_number } = req.body;
+    const { first_name, last_name, email, phone_number, password } = req.body;
 
-    if (!first_name || !last_name || !email || !phone_number) {
+    if (!first_name || !last_name || !email || !phone_number || !password) {
       return errorResponse(res, 400, "All fields are required");
     }
 
@@ -28,7 +28,7 @@ const SignupService = async (req, res) => {
 
     // await client.query("BEGIN");
 
-    const password = generatePassword("users");
+    // const password = generatePassword("users");
     const role = "users";
     console.log("this is userpassword", password);
     const salt = await bcrypt.genSalt(10);
