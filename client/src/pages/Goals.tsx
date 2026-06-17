@@ -62,8 +62,9 @@ const Goals = () => {
 
   const circumference = 2 * Math.PI * radius;
 
-  const strokeDashoffset =
-    circumference - (Flex.percentageSaved / 100) * circumference;
+  const percentage = Flex.percentageSaved;
+
+  const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
     <div className="p-3 h-screen">
@@ -232,7 +233,7 @@ const Goals = () => {
                         stroke="#3B82F6"
                         strokeWidth="8"
                         strokeLinecap="round"
-                        strokeDasharray={`${item.percentageSaved}%`}
+                        strokeDasharray={circumference}
                         strokeDashoffset={strokeDashoffset}
                       />
                     </svg>
